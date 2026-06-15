@@ -1,6 +1,8 @@
 package br.com.leperber.sistema_cobrancas_assinaturas.model;
 
 
+import jakarta.persistence.ManyToOne;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -10,16 +12,14 @@ public class Cobranca {
     private LocalDate dataVencimento;
     private LocalDate dataPagamento;
     private StatusCobranca statusCobranca;
+    @ManyToOne
+    private PlanoAssinatura planoAssinatura;
 
-    public Cobranca(BigDecimal valor, LocalDate dataVencimento, StatusCobranca statusCobranca){
-
-        if(valor == null){
-            throw new IllegalArgumentException("Valor da cobrança não pode estár vazio!");
-        }
-
-        this.valor = valor;
+    public Cobranca( LocalDate dataVencimento, PlanoAssinatura planoAssinatura){
+        this.planoAssinatura = planoAssinatura;
+        this.valor = planoAssinatura.getPreco();
         this.dataVencimento = dataVencimento;
-        this.statusCobranca = statusCobranca;
+        this.statusCobranca = StatusCobranca.PENDENTE;
     }
 
     public Long getId() {
