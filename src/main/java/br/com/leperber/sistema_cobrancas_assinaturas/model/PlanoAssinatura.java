@@ -1,14 +1,24 @@
 package br.com.leperber.sistema_cobrancas_assinaturas.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 import java.math.BigDecimal;
 
+@Entity
 public class PlanoAssinatura {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
     private BigDecimal preco;
     private String descricao;
     private Boolean habilitado;
+
+    public PlanoAssinatura(){}
 
     public PlanoAssinatura(String nome, BigDecimal preco){
         if(nome.isBlank()) {

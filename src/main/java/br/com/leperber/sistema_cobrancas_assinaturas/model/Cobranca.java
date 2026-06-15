@@ -1,19 +1,26 @@
 package br.com.leperber.sistema_cobrancas_assinaturas.model;
 
 
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+@Entity
 public class Cobranca {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private BigDecimal valor;
     private LocalDate dataVencimento;
     private LocalDate dataPagamento;
+    @Enumerated(EnumType.STRING)
     private StatusCobranca statusCobranca;
     @ManyToOne
     private PlanoAssinatura planoAssinatura;
+
+    public Cobranca(){}
 
     public Cobranca( LocalDate dataVencimento, PlanoAssinatura planoAssinatura){
         this.planoAssinatura = planoAssinatura;
