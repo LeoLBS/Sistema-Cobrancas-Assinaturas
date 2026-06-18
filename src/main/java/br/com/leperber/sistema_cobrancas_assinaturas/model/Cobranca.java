@@ -19,6 +19,8 @@ public class Cobranca {
     private StatusCobranca statusCobranca;
     @ManyToOne
     private PlanoAssinatura planoAssinatura;
+    @ManyToOne
+    private MetodoPagamento metodoPagamento;
 
     public Cobranca(){}
 
@@ -49,6 +51,10 @@ public class Cobranca {
         return statusCobranca;
     }
 
+    public PlanoAssinatura getPlanoAssinatura(){ return planoAssinatura; }
+
+    public MetodoPagamento getMetodoPagamento(){ return  metodoPagamento; }
+
     public void setValor(BigDecimal valor) {
         this.valor = valor;
     }
@@ -64,4 +70,8 @@ public class Cobranca {
     public void setStatusCobranca(StatusCobranca statusCobranca) {
         this.statusCobranca = statusCobranca;
     }
+
+    public void setPlanoAssinatura(PlanoAssinatura planoAssinatura) { this.planoAssinatura = planoAssinatura; }
+
+    public void setMetodoPagamento(MetodoPagamento metodoPagamento) { this.metodoPagamento = metodoPagamento; }
 }
