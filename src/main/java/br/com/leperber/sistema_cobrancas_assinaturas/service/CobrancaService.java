@@ -1,7 +1,10 @@
 package br.com.leperber.sistema_cobrancas_assinaturas.service;
 
 import br.com.leperber.sistema_cobrancas_assinaturas.model.Cobranca;
+import br.com.leperber.sistema_cobrancas_assinaturas.model.MetodoPagamento;
+import br.com.leperber.sistema_cobrancas_assinaturas.model.StatusCobranca;
 import br.com.leperber.sistema_cobrancas_assinaturas.repository.CobrancaRepository;
+import br.com.leperber.sistema_cobrancas_assinaturas.repository.MetodoPagamentoRepository;
 import br.com.leperber.sistema_cobrancas_assinaturas.repository.PlanoAssinaturaRepository;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +15,22 @@ public class CobrancaService {
 
     private final CobrancaRepository cobrancaRepository;
     private final PlanoAssinaturaRepository planoAssinaturaRepository;
+    private final MetodoPagamentoRepository metodoPagamentoRepository;
 
-    public CobrancaService(CobrancaRepository cobrancaRepository, PlanoAssinaturaRepository planoAssinaturaRepository){
+    public CobrancaService(CobrancaRepository cobrancaRepository, PlanoAssinaturaRepository planoAssinaturaRepository, MetodoPagamentoRepository metodoPagamentoRepository){
         this.cobrancaRepository = cobrancaRepository;
         this.planoAssinaturaRepository = planoAssinaturaRepository;
+        this.metodoPagamentoRepository = metodoPagamentoRepository;
+    }
+
+    private Cobranca buscarCobrancaPorId(Long idCobranca){
+        return cobrancaRepository.findById(idCobranca)
+                .orElseThrow(() -> new IllegalArgumentException("Cobranca não encontrada!"));
+    }
+
+    private MetodoPagamento buscarMetodoPagamentoPorID(Long idMetodoPagamento){
+        return metodoPagamentoRepository.findById(idMetodoPagamento)
+                .orElseThrow(() -> new IllegalArgumentException("Metodo de pagamento não encontrado!"));
     }
 
     public Cobranca gerarCobranca(Long idPlano, LocalDate dataVencimento){
@@ -28,5 +43,19 @@ public class CobrancaService {
         return cobrancaRepository.save(cobranca);
     }
 
+    public Cobranca pagarCobranca(Long idCobranca, Long idMetodoPagamento){
+        Cobranca cobranca = buscarCobrancaPorId(idCobranca);
+        MetodoPagamento metodoPagamento = buscarMetodoPagamentoPorID(idMetodoPagamento);
+
+        if(cobranca.getStatusCobranca().equals(StatusCobranca.PAGA)){
+            throw new IllegalArgumentException("Status da cobranca ja está como paga!");
+        }
+
+        cobranca.setMetodoPagamento(metodoPagamento);
+        cobranca.setStatusCobranca(StatusCobranca.PAGA);
+        cobranca.setDataPagamento(LocalDate.now());
+
+        return cobrancaRepository.save(cobranca);
+    }
 
 }
