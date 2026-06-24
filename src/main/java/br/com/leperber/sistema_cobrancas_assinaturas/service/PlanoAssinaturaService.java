@@ -26,4 +26,9 @@ public class PlanoAssinaturaService {
 
         return planoAssinaturaRepository.save(planoAssinatura);
     }
+
+    private PlanoAssinatura buscarPlanoAssinaturaPorId(Long idPlanoAssinatura){
+        return planoAssinaturaRepository.findById(idPlanoAssinatura)
+                .orElseThrow(() -> new IllegalArgumentException("Plano de assinatura não encontrado!"));
+    }
 }
