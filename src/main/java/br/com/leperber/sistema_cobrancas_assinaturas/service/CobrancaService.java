@@ -53,7 +53,6 @@ public class CobrancaService {
         }
 
         cobranca.setMetodoPagamento(metodoPagamento);
-        cobranca.setValor(BigDecimal.ZERO);
         cobranca.setStatusCobranca(StatusCobranca.PAGA);
         cobranca.setDataPagamento(LocalDate.now());
 
