@@ -4,6 +4,7 @@ import br.com.leperber.sistema_cobrancas_assinaturas.model.PlanoAssinatura;
 import br.com.leperber.sistema_cobrancas_assinaturas.repository.PlanoAssinaturaRepository;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -52,5 +53,17 @@ public class PlanoAssinaturaService {
         planoAssinatura.setNome(novoNome);
 
         return planoAssinaturaRepository.save(planoAssinatura);
+    }
+
+    public PlanoAssinatura alterarPreco(Long idPlanoAssinatura, BigDecimal novoPreco){
+        PlanoAssinatura planoAssinatura = buscarPlanoAssinaturaPorId(idPlanoAssinatura);
+
+        if(novoPreco == null || novoPreco.compareTo(BigDecimal.ZERO) <= 0){
+            throw new IllegalArgumentException("O novo preço não pode estar vazio!");
+        }
+
+        planoAssinatura.setPreco(novoPreco);
+
+        return  planoAssinaturaRepository.save(planoAssinatura);
     }
 }
