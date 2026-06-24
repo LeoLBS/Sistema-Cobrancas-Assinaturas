@@ -48,4 +48,20 @@ public class MetodoPagamentoService {
 
         return metodoPagamentoRepository.save(metodoPagamento);
     }
+
+    public MetodoPagamento alterarStatus(Long idMetodoPagamento, Boolean statusNovo){
+        MetodoPagamento metodoPagamento = buscarMetodoPagamentoPorId(idMetodoPagamento);
+
+        if(statusNovo == null){
+            throw new IllegalArgumentException("O novo status não pode estar vazio!");
+        }
+
+        if(metodoPagamento.getHabilitado().equals(statusNovo)){
+            throw new IllegalArgumentException("O status do método de pagamento ja se encontra como: " + metodoPagamento.getHabilitado());
+        }
+
+        metodoPagamento.setHabilitado(statusNovo);
+
+        return metodoPagamentoRepository.save(metodoPagamento);
+    }
 }
