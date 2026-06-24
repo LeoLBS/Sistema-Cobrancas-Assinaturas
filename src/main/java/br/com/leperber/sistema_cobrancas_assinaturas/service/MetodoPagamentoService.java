@@ -21,4 +21,9 @@ public class MetodoPagamentoService {
 
         return metodoPagamentoRepository.save(metodoPagamento);
     }
+
+    private MetodoPagamento buscarMetodoPagamentoPorId(Long idMetodoPagamento){
+        return metodoPagamentoRepository.findById(idMetodoPagamento)
+                .orElseThrow(() -> new IllegalArgumentException("Método de pagamento não encontrado!"));
+    }
 }
