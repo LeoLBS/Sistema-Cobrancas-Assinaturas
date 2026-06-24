@@ -95,4 +95,16 @@ public class CobrancaService {
     public Cobranca buscarPorId(Long idCobranca){
         return buscarCobrancaPorId(idCobranca);
     }
+
+    public Cobranca cancelarCobranca(Long idCobranca){
+        Cobranca cobranca = buscarCobrancaPorId(idCobranca);
+
+        if(cobranca.getStatusCobranca().equals(StatusCobranca.PAGA) || cobranca.getStatusCobranca().equals(StatusCobranca.CANCELADA)){
+            throw new IllegalArgumentException("A cobranca ja foi " + cobranca.getStatusCobranca() + ", não é permitido mudar ela para cancelada!");
+        }
+
+        cobranca.setStatusCobranca(StatusCobranca.CANCELADA);
+
+        return cobrancaRepository.save(cobranca);
+    }
 }
