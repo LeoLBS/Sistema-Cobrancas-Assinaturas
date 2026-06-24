@@ -41,4 +41,16 @@ public class PlanoAssinaturaService {
     public List<PlanoAssinatura> listarTodosPlanoAssinatura(){
         return planoAssinaturaRepository.findAll();
     }
+
+    public PlanoAssinatura alterarNome(Long idPlanoAssinatura, String novoNome){
+        PlanoAssinatura planoAssinatura = buscarPlanoAssinaturaPorId(idPlanoAssinatura);
+
+        if(novoNome == null || novoNome.isBlank()){
+            throw new IllegalArgumentException("Novo nome não pode estár vazio!");
+        }
+
+        planoAssinatura.setNome(novoNome);
+
+        return planoAssinaturaRepository.save(planoAssinatura);
+    }
 }
