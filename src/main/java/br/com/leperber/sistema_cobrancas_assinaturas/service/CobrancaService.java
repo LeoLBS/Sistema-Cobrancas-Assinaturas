@@ -8,6 +8,7 @@ import br.com.leperber.sistema_cobrancas_assinaturas.repository.MetodoPagamentoR
 import br.com.leperber.sistema_cobrancas_assinaturas.repository.PlanoAssinaturaRepository;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Service
@@ -52,10 +53,26 @@ public class CobrancaService {
         }
 
         cobranca.setMetodoPagamento(metodoPagamento);
+        cobranca.setValor(BigDecimal.ZERO);
         cobranca.setStatusCobranca(StatusCobranca.PAGA);
         cobranca.setDataPagamento(LocalDate.now());
 
         return cobrancaRepository.save(cobranca);
     }
 
+    public Cobranca atualizarValor(Long idCobranca, BigDecimal valorParaAtualizar){
+        Cobranca cobranca = buscarCobrancaPorId(idCobranca);
+
+        if(!cobranca.getStatusCobranca().equals(StatusCobranca.PENDENTE) && !cobranca.getStatusCobranca().equals(StatusCobranca.VENCIDA)){
+            throw new IllegalArgumentException("A cobranca esta como: " + cobranca.getStatusCobranca() + " por isso não pode ser alterada!");
+        }
+
+        if(valorParaAtualizar == null || valorParaAtualizar.compareTo(BigDecimal.ZERO) <= 0){
+            throw new IllegalArgumentException("O valor informado para alteração precisa ser maior que zero!");
+        }
+
+        cobranca.setValor(valorParaAtualizar);
+
+        return cobrancaRepository.save(cobranca);
+    }
 }
