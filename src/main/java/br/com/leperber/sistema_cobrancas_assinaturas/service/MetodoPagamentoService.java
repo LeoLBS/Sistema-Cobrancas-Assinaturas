@@ -36,4 +36,16 @@ public class MetodoPagamentoService {
     public List<MetodoPagamento> listarTodosMetodoPagamento(){
         return metodoPagamentoRepository.findAll();
     }
+
+    public MetodoPagamento alterarNome(Long idMetodoPagamento, String novoNome){
+        MetodoPagamento metodoPagamento = buscarMetodoPagamentoPorId(idMetodoPagamento);
+
+        if(novoNome == null || novoNome.isBlank()){
+            throw new IllegalArgumentException("Novo nome não pode estár vazio!");
+        }
+
+        metodoPagamento.setNome(novoNome);
+
+        return metodoPagamentoRepository.save(metodoPagamento);
+    }
 }
