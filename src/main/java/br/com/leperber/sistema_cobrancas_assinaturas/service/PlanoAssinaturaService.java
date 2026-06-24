@@ -4,6 +4,8 @@ import br.com.leperber.sistema_cobrancas_assinaturas.model.PlanoAssinatura;
 import br.com.leperber.sistema_cobrancas_assinaturas.repository.PlanoAssinaturaRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PlanoAssinaturaService {
 
@@ -30,5 +32,13 @@ public class PlanoAssinaturaService {
     private PlanoAssinatura buscarPlanoAssinaturaPorId(Long idPlanoAssinatura){
         return planoAssinaturaRepository.findById(idPlanoAssinatura)
                 .orElseThrow(() -> new IllegalArgumentException("Plano de assinatura não encontrado!"));
+    }
+
+    public PlanoAssinatura buscarPorId(Long idPlanoAssinatura){
+        return buscarPlanoAssinaturaPorId(idPlanoAssinatura);
+    }
+
+    public List<PlanoAssinatura> listarTodosPlanoAssinatura(){
+        return planoAssinaturaRepository.findAll();
     }
 }
