@@ -12,11 +12,13 @@ public class MetodoPagamento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+    private Boolean habilitado;
 
     public MetodoPagamento(){}
 
     public MetodoPagamento(String nome){
         this.nome = nome;
+        this.habilitado = true;
     }
 
     public Long getId() {
@@ -27,7 +29,15 @@ public class MetodoPagamento {
         return nome;
     }
 
+    public Boolean getHabilitado() {
+        return habilitado;
+    }
+
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public void setHabilitado(Boolean habilitado) {
+        this.habilitado = habilitado;
     }
 }
