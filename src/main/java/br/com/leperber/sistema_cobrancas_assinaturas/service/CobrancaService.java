@@ -75,4 +75,16 @@ public class CobrancaService {
 
         return cobrancaRepository.save(cobranca);
     }
+
+    public Cobranca atualizaDataVencimento(Long idCobranca, LocalDate dataVencimentoNova){
+        Cobranca cobranca = buscarCobrancaPorId(idCobranca);
+
+        if(dataVencimentoNova == null){
+            throw new IllegalArgumentException("A data informada não pode ser vazia!");
+        }
+
+        cobranca.setDataVencimento(dataVencimentoNova);
+
+        return cobrancaRepository.save(cobranca);
+    }
 }
