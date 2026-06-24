@@ -66,4 +66,16 @@ public class PlanoAssinaturaService {
 
         return  planoAssinaturaRepository.save(planoAssinatura);
     }
+
+    public PlanoAssinatura alterarDescricao(Long idPlanoAssinatura, String novaDescricao){
+        PlanoAssinatura planoAssinatura = buscarPlanoAssinaturaPorId(idPlanoAssinatura);
+
+        if(novaDescricao == null || novaDescricao.isBlank()){
+            throw new IllegalArgumentException("A descrição não pode estar vazia!");
+        }
+
+        planoAssinatura.setDescricao(novaDescricao);
+
+        return planoAssinaturaRepository.save(planoAssinatura);
+    }
 }
