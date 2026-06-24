@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class CobrancaService {
@@ -85,5 +86,13 @@ public class CobrancaService {
         cobranca.setDataVencimento(dataVencimentoNova);
 
         return cobrancaRepository.save(cobranca);
+    }
+
+    public List<Cobranca> listarTodasCobrancas(){
+        return cobrancaRepository.findAll();
+    }
+
+    public Cobranca buscarPorId(Long idCobranca){
+        return buscarCobrancaPorId(idCobranca);
     }
 }
