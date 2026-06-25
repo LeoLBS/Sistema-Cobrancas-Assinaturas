@@ -78,4 +78,20 @@ public class PlanoAssinaturaService {
 
         return planoAssinaturaRepository.save(planoAssinatura);
     }
+
+    public PlanoAssinatura alteraStatus(Long idPlanoAssinatura, Boolean novoStatus){
+        PlanoAssinatura planoAssinatura = buscarPlanoAssinaturaPorId(idPlanoAssinatura);
+
+        if(novoStatus == null){
+            throw new IllegalArgumentException("O novo status não pode estar vazio!");
+        }
+
+        if(planoAssinatura.getHabilitado().equals(novoStatus)){
+            throw new IllegalArgumentException("O status do método de pagamento ja se encontra como: " + planoAssinatura.getHabilitado());
+        }
+
+        planoAssinatura.setHabilitado(novoStatus);
+
+        return  planoAssinaturaRepository.save(planoAssinatura);
+    }
 }
