@@ -18,11 +18,6 @@ public class PlanoAssinaturaService {
 
     public PlanoAssinatura criarPlanoAssinatura(PlanoAssinatura planoAssinatura){
 
-        planoAssinaturaRepository.findById(planoAssinatura.getId())
-                .ifPresent(id -> {
-                    throw new IllegalArgumentException("Plano ja criado com esse mesmo ID!");
-                });
-
         if(planoAssinatura.getNome() == null || planoAssinatura.getNome().isBlank()){
             throw new IllegalArgumentException("Nome não pode estár vazio!");
         }
