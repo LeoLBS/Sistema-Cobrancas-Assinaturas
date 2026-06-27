@@ -22,6 +22,11 @@ public class PlanoAssinaturaController {
         return planoAssinaturaService.listarTodosPlanoAssinatura();
     }
 
+    @GetMapping("/{idPlano}")
+    public PlanoAssinatura buscarPorId(@PathVariable Long idPlano){
+        return planoAssinaturaService.buscarPorId(idPlano);
+    }
+
     @PostMapping("/criar")
     public PlanoAssinatura criarPlano(@RequestBody PlanoAssinatura planoAssinatura){
         return planoAssinaturaService.criarPlanoAssinatura(planoAssinatura);
