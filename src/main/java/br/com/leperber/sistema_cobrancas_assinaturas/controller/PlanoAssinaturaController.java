@@ -48,4 +48,12 @@ public class PlanoAssinaturaController {
 
         return planoAssinaturaService.alterarPreco(idPlano, dados.get("novoPreco"));
     }
+
+    @PutMapping("/alteraDescricao/{idPlano}")
+    public PlanoAssinatura alterarDescricao(
+            @PathVariable Long idPlano,
+            @RequestBody Map<String, String> dados){
+
+        return  planoAssinaturaService.alterarDescricao(idPlano, dados.get("novaDescricao"));
+    }
 }
