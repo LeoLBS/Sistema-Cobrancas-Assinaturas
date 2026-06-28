@@ -5,6 +5,7 @@ import br.com.leperber.sistema_cobrancas_assinaturas.service.MetodoPagamentoServ
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/mepagamento")
@@ -29,5 +30,13 @@ public class MetodoPagamentoController {
     @PostMapping("/criar")
     public MetodoPagamento criarMetodoPagamento(@RequestBody MetodoPagamento metodoPagamento){
         return metodoPagamentoService.criarMetodoPagamento(metodoPagamento);
+    }
+
+    @PutMapping("/alterarNome/{idMetodoPagamento}")
+    public MetodoPagamento alterarNome(
+            @PathVariable Long idMetodoPagamento,
+            @RequestBody Map<String, String> dados){
+
+        return metodoPagamentoService.alterarNome(idMetodoPagamento, dados.get("novoNome"));
     }
 }
