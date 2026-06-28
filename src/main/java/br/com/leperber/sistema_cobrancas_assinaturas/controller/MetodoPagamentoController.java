@@ -39,4 +39,12 @@ public class MetodoPagamentoController {
 
         return metodoPagamentoService.alterarNome(idMetodoPagamento, dados.get("novoNome"));
     }
+
+    @PutMapping("/alterarStatus/{idMetodoPagamento}")
+    public MetodoPagamento alterarStatus(
+            @PathVariable Long idMetodoPagamento,
+            @RequestBody Map<String, Boolean> dados){
+
+        return metodoPagamentoService.alterarStatus(idMetodoPagamento, dados.get("novoStatus"));
+    }
 }
