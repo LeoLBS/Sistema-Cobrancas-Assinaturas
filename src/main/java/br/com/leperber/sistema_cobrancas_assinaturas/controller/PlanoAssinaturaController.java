@@ -33,11 +33,19 @@ public class PlanoAssinaturaController {
         return planoAssinaturaService.criarPlanoAssinatura(planoAssinatura);
     }
 
-    @PutMapping("/{idPlano}")
+    @PutMapping("/alteraNome/{idPlano}")
     public PlanoAssinatura alterarNome(
             @PathVariable Long idPlano,
             @RequestBody Map<String, String> dados){
 
         return planoAssinaturaService.alterarNome(idPlano, dados.get("novoNome"));
+    }
+
+    @PutMapping("/alteraPreco/{idPlano}")
+    public PlanoAssinatura alterarPreco(
+            @PathVariable Long idPlano,
+            @RequestBody Map<String, BigDecimal> dados){
+
+        return planoAssinaturaService.alterarPreco(idPlano, dados.get("novoPreco"));
     }
 }
