@@ -29,6 +29,7 @@ public class PlanoAssinatura {
         }
         this.nome = nome;
         this.preco = preco;
+        this.habilitado = false;
     }
 
     public Long getId() {
