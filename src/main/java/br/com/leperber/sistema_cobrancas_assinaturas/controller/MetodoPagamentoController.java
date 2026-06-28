@@ -2,10 +2,7 @@ package br.com.leperber.sistema_cobrancas_assinaturas.controller;
 
 import br.com.leperber.sistema_cobrancas_assinaturas.model.MetodoPagamento;
 import br.com.leperber.sistema_cobrancas_assinaturas.service.MetodoPagamentoService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,5 +24,10 @@ public class MetodoPagamentoController {
     @GetMapping("/{idMetodoPagamento}")
     public MetodoPagamento buscarPorId(@PathVariable Long idMetodoPagamento){
         return metodoPagamentoService.buscarPorId(idMetodoPagamento);
+    }
+
+    @PostMapping("/criar")
+    public MetodoPagamento criarMetodoPagamento(@RequestBody MetodoPagamento metodoPagamento){
+        return metodoPagamentoService.criarMetodoPagamento(metodoPagamento);
     }
 }
