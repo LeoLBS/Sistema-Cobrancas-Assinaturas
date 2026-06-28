@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/planos")
@@ -30,5 +31,13 @@ public class PlanoAssinaturaController {
     @PostMapping("/criar")
     public PlanoAssinatura criarPlano(@RequestBody PlanoAssinatura planoAssinatura){
         return planoAssinaturaService.criarPlanoAssinatura(planoAssinatura);
+    }
+
+    @PutMapping("/{idPlano}")
+    public PlanoAssinatura alterarNome(
+            @PathVariable Long idPlano,
+            @RequestBody Map<String, String> dados){
+
+        return planoAssinaturaService.alterarNome(idPlano, dados.get("novoNome"));
     }
 }
