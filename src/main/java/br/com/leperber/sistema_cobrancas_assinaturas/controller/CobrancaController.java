@@ -1,6 +1,7 @@
 package br.com.leperber.sistema_cobrancas_assinaturas.controller;
 
 import br.com.leperber.sistema_cobrancas_assinaturas.dto.cobranca.CriarCobrancaDTO;
+import br.com.leperber.sistema_cobrancas_assinaturas.dto.cobranca.PagarCobrancaDTO;
 import br.com.leperber.sistema_cobrancas_assinaturas.model.Cobranca;
 import br.com.leperber.sistema_cobrancas_assinaturas.service.CobrancaService;
 import org.springframework.web.bind.annotation.*;
@@ -30,5 +31,12 @@ public class CobrancaController {
     @PostMapping("/criar")
     public Cobranca gerarCobranca(@RequestBody CriarCobrancaDTO criarCobrancaDTO){
         return cobrancaService.gerarCobranca(criarCobrancaDTO.getIdPlano(), criarCobrancaDTO.getDataVencimento());
+    }
+
+    @PutMapping("/pagar")
+    public Cobranca pagarCobranca(@RequestBody PagarCobrancaDTO pagarCobrancaDTO){
+        return cobrancaService.pagarCobranca(
+                pagarCobrancaDTO.getIdCobranca(),
+                pagarCobrancaDTO.getIdMetodoPagamento());
     }
 }
