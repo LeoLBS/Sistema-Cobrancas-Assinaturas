@@ -1,5 +1,6 @@
 package br.com.leperber.sistema_cobrancas_assinaturas.controller;
 
+import br.com.leperber.sistema_cobrancas_assinaturas.dto.cobranca.AtualizaValorCobrancaDTO;
 import br.com.leperber.sistema_cobrancas_assinaturas.dto.cobranca.CriarCobrancaDTO;
 import br.com.leperber.sistema_cobrancas_assinaturas.dto.cobranca.PagarCobrancaDTO;
 import br.com.leperber.sistema_cobrancas_assinaturas.model.Cobranca;
@@ -38,5 +39,12 @@ public class CobrancaController {
         return cobrancaService.pagarCobranca(
                 pagarCobrancaDTO.getIdCobranca(),
                 pagarCobrancaDTO.getIdMetodoPagamento());
+    }
+
+    @PutMapping("/atualizarvalor")
+    public Cobranca atualizarValor(@RequestBody AtualizaValorCobrancaDTO atualizaValorCobrancaDTO){
+        return cobrancaService.atualizarValor(
+                atualizaValorCobrancaDTO.getIdCobranca(),
+                atualizaValorCobrancaDTO.getNovoValor());
     }
 }
