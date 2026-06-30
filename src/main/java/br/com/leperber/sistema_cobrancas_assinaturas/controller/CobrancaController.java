@@ -1,9 +1,6 @@
 package br.com.leperber.sistema_cobrancas_assinaturas.controller;
 
-import br.com.leperber.sistema_cobrancas_assinaturas.dto.cobranca.AtualizaValorCobrancaDTO;
-import br.com.leperber.sistema_cobrancas_assinaturas.dto.cobranca.AtualizaVencimentoCobrancaDTO;
-import br.com.leperber.sistema_cobrancas_assinaturas.dto.cobranca.CriarCobrancaDTO;
-import br.com.leperber.sistema_cobrancas_assinaturas.dto.cobranca.PagarCobrancaDTO;
+import br.com.leperber.sistema_cobrancas_assinaturas.dto.cobranca.*;
 import br.com.leperber.sistema_cobrancas_assinaturas.model.Cobranca;
 import br.com.leperber.sistema_cobrancas_assinaturas.service.CobrancaService;
 import org.springframework.web.bind.annotation.*;
@@ -56,5 +53,10 @@ public class CobrancaController {
         return  cobrancaService.atualizaDataVencimento(
                 atualizaVencimentoCobrancaDTO.getIdCobranca(),
                 atualizaVencimentoCobrancaDTO.getNovoVencimento());
+    }
+
+    @PutMapping("/cancelacobranca")
+    public Cobranca cancelarCobranca(@RequestBody CancelaCobrancaDTO cancelaCobrancaDTO){
+        return cobrancaService.cancelarCobranca(cancelaCobrancaDTO.getIdCobranca());
     }
 }
