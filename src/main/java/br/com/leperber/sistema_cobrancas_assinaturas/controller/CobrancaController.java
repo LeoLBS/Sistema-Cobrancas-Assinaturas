@@ -1,8 +1,12 @@
 package br.com.leperber.sistema_cobrancas_assinaturas.controller;
 
+import br.com.leperber.sistema_cobrancas_assinaturas.model.Cobranca;
 import br.com.leperber.sistema_cobrancas_assinaturas.service.CobrancaService;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/cobranca")
@@ -12,5 +16,10 @@ public class CobrancaController {
 
     public CobrancaController(CobrancaService cobrancaService){
         this.cobrancaService = cobrancaService;
+    }
+
+    @GetMapping
+    public List<Cobranca> listarTodasCobrancas(){
+        return cobrancaService.listarTodasCobrancas();
     }
 }
