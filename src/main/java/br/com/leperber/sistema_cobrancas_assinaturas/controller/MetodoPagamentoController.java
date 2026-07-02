@@ -1,5 +1,6 @@
 package br.com.leperber.sistema_cobrancas_assinaturas.controller;
 
+import br.com.leperber.sistema_cobrancas_assinaturas.dto.metodopagamento.CriarMetodoPagamentoDTO;
 import br.com.leperber.sistema_cobrancas_assinaturas.model.MetodoPagamento;
 import br.com.leperber.sistema_cobrancas_assinaturas.service.MetodoPagamentoService;
 import org.springframework.web.bind.annotation.*;
@@ -28,8 +29,8 @@ public class MetodoPagamentoController {
     }
 
     @PostMapping("/criar")
-    public MetodoPagamento criarMetodoPagamento(@RequestBody MetodoPagamento metodoPagamento){
-        return metodoPagamentoService.criarMetodoPagamento(metodoPagamento);
+    public MetodoPagamento criarMetodoPagamento(@RequestBody CriarMetodoPagamentoDTO criarMetodoPagamentoDTO){
+        return metodoPagamentoService.criarMetodoPagamento(criarMetodoPagamentoDTO.getNomeMetodo());
     }
 
     @PutMapping("/alterarNome/{idMetodoPagamento}")
