@@ -15,11 +15,13 @@ public class MetodoPagamentoService {
         this.metodoPagamentoRepository = metodoPagamentoRepository;
     }
 
-    public MetodoPagamento criarMetodoPagamento(MetodoPagamento metodoPagamento){
+    public MetodoPagamento criarMetodoPagamento(String nome){
 
-        if(metodoPagamento.getNome() == null || metodoPagamento.getNome().isBlank()){
+        if(nome == null || nome.isBlank()){
             throw new IllegalArgumentException("Nome não pode estár vazio!");
         }
+
+        MetodoPagamento metodoPagamento = new MetodoPagamento(nome);
 
         return metodoPagamentoRepository.save(metodoPagamento);
     }
