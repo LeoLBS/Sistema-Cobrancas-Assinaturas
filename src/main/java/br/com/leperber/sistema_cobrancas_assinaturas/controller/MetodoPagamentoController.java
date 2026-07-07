@@ -1,6 +1,7 @@
 package br.com.leperber.sistema_cobrancas_assinaturas.controller;
 
 import br.com.leperber.sistema_cobrancas_assinaturas.dto.metodopagamento.AtualizaNomeMetodoPagamentoDTO;
+import br.com.leperber.sistema_cobrancas_assinaturas.dto.metodopagamento.AtualizaStatusMetodoPagamentoDTO;
 import br.com.leperber.sistema_cobrancas_assinaturas.dto.metodopagamento.CriarMetodoPagamentoDTO;
 import br.com.leperber.sistema_cobrancas_assinaturas.model.MetodoPagamento;
 import br.com.leperber.sistema_cobrancas_assinaturas.service.MetodoPagamentoService;
@@ -43,11 +44,12 @@ public class MetodoPagamentoController {
                 atualizaNomeMetodoPagamentoDTO.getNovoNome());
     }
 
-    @PutMapping("/alterarStatus/{idMetodoPagamento}")
+    @PutMapping("/alterarStatus")
     public MetodoPagamento alterarStatus(
-            @PathVariable Long idMetodoPagamento,
-            @RequestBody Map<String, Boolean> dados){
+            @RequestBody AtualizaStatusMetodoPagamentoDTO atualizaStatusMetodoPagamentoDTO){
 
-        return metodoPagamentoService.alterarStatus(idMetodoPagamento, dados.get("novoStatus"));
+        return metodoPagamentoService.alterarStatus(
+                atualizaStatusMetodoPagamentoDTO.getIdMetodoPagamento(),
+                atualizaStatusMetodoPagamentoDTO.getNovoStatus());
     }
 }
