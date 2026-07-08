@@ -16,11 +16,13 @@ public class PlanoAssinaturaService {
         this.planoAssinaturaRepository = planoAssinaturaRepository;
     }
 
-    public PlanoAssinatura criarPlanoAssinatura(PlanoAssinatura planoAssinatura){
+    public PlanoAssinatura criarPlanoAssinatura(String nome, BigDecimal preco){
 
-        if(planoAssinatura.getNome() == null || planoAssinatura.getNome().isBlank()){
+        if(nome == null || nome.isBlank()){
             throw new IllegalArgumentException("Nome não pode estár vazio!");
         }
+
+        PlanoAssinatura planoAssinatura = new PlanoAssinatura(nome, preco);
 
         return planoAssinaturaRepository.save(planoAssinatura);
     }
