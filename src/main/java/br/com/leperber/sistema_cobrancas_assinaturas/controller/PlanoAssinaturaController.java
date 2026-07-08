@@ -1,5 +1,6 @@
 package br.com.leperber.sistema_cobrancas_assinaturas.controller;
 
+import br.com.leperber.sistema_cobrancas_assinaturas.dto.planoassinatura.CriarPlanoAssinaturaDTO;
 import br.com.leperber.sistema_cobrancas_assinaturas.model.PlanoAssinatura;
 import br.com.leperber.sistema_cobrancas_assinaturas.service.PlanoAssinaturaService;
 import org.springframework.web.bind.annotation.*;
@@ -29,8 +30,11 @@ public class PlanoAssinaturaController {
     }
 
     @PostMapping("/criar")
-    public PlanoAssinatura criarPlano(@RequestBody PlanoAssinatura planoAssinatura){
-        return planoAssinaturaService.criarPlanoAssinatura(planoAssinatura);
+    public PlanoAssinatura criarPlano(
+            @RequestBody CriarPlanoAssinaturaDTO criarPlanoAssinaturaDTO){
+        return planoAssinaturaService.criarPlanoAssinatura(
+                criarPlanoAssinaturaDTO.getNomePlano(),
+                criarPlanoAssinaturaDTO.getPrecoPlano());
     }
 
     @PutMapping("/alteraNome/{idPlano}")
