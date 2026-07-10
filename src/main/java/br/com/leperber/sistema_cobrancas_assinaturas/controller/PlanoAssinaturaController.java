@@ -1,5 +1,6 @@
 package br.com.leperber.sistema_cobrancas_assinaturas.controller;
 
+import br.com.leperber.sistema_cobrancas_assinaturas.dto.planoassinatura.AtualizaDescricaoPlanoAssinaturaDTO;
 import br.com.leperber.sistema_cobrancas_assinaturas.dto.planoassinatura.AtualizaNomePlanoAssinaturaDTO;
 import br.com.leperber.sistema_cobrancas_assinaturas.dto.planoassinatura.AtualizaPrecoPlanoAssinaturaDTO;
 import br.com.leperber.sistema_cobrancas_assinaturas.dto.planoassinatura.CriarPlanoAssinaturaDTO;
@@ -57,12 +58,14 @@ public class PlanoAssinaturaController {
                 atualizaPrecoPlanoAssinaturaDTO.getNovoPreco());
     }
 
-    @PutMapping("/alteraDescricao/{idPlano}")
+    @PutMapping("/alteraDescricao")
     public PlanoAssinatura alterarDescricao(
-            @PathVariable Long idPlano,
-            @RequestBody Map<String, String> dados){
+            @RequestBody AtualizaDescricaoPlanoAssinaturaDTO atualizaDescricaoPlanoAssinaturaDTO){
 
-        return  planoAssinaturaService.alterarDescricao(idPlano, dados.get("novaDescricao"));
+        return  planoAssinaturaService.alterarDescricao(
+                atualizaDescricaoPlanoAssinaturaDTO.getIdPlano(),
+                atualizaDescricaoPlanoAssinaturaDTO.getNovaDescricao()
+        );
     }
 
     @PutMapping("/alteraStatus/{idPlano}")
