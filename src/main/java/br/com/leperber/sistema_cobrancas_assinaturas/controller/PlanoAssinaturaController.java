@@ -1,9 +1,6 @@
 package br.com.leperber.sistema_cobrancas_assinaturas.controller;
 
-import br.com.leperber.sistema_cobrancas_assinaturas.dto.planoassinatura.AtualizaDescricaoPlanoAssinaturaDTO;
-import br.com.leperber.sistema_cobrancas_assinaturas.dto.planoassinatura.AtualizaNomePlanoAssinaturaDTO;
-import br.com.leperber.sistema_cobrancas_assinaturas.dto.planoassinatura.AtualizaPrecoPlanoAssinaturaDTO;
-import br.com.leperber.sistema_cobrancas_assinaturas.dto.planoassinatura.CriarPlanoAssinaturaDTO;
+import br.com.leperber.sistema_cobrancas_assinaturas.dto.planoassinatura.*;
 import br.com.leperber.sistema_cobrancas_assinaturas.model.PlanoAssinatura;
 import br.com.leperber.sistema_cobrancas_assinaturas.service.PlanoAssinaturaService;
 import org.springframework.web.bind.annotation.*;
@@ -68,12 +65,13 @@ public class PlanoAssinaturaController {
         );
     }
 
-    @PutMapping("/alteraStatus/{idPlano}")
+    @PutMapping("/alteraStatus")
     public PlanoAssinatura alteraStatus(
-            @PathVariable Long idPlano,
-            @RequestBody Map<String, Boolean> dados){
+            @RequestBody AtualizaStatusPlanoAssinaturaDTO atualizaStatusPlanoAssinaturaDTO){
 
-        return  planoAssinaturaService.alteraStatus(idPlano, dados.get("novoStatus"));
+        return  planoAssinaturaService.alteraStatus(
+                atualizaStatusPlanoAssinaturaDTO.getIdPlano(),
+                atualizaStatusPlanoAssinaturaDTO.getNovoStatus());
 
     }
 }
